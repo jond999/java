@@ -3,5 +3,5 @@
 
 How to run a program:
 
-$ javac Application.java
+$ javac Application.java  
 $ java Application
