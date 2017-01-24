@@ -1,9 +1,9 @@
-package contas;
 
-import java.text.SimpleDateFormat;
+package contas;
 
 public class Debito extends Conta
 {	
+	@Override
 	public boolean levantar(double valor)
 	{
 		if(super.saldo >= valor)
@@ -16,6 +16,7 @@ public class Debito extends Conta
 		return false;
 	}
 	
+	@Override
 	public boolean transferir(double valor, Conta contadestino)
 	{
 		if(super.saldo >= valor)
@@ -27,8 +28,11 @@ public class Debito extends Conta
 		return false;
 	}
 	
+	@Override
 	public String mostrar()
 	{
+		this.mostrarSaldo();
+		
 		String info = "";
 		
 		info += "NIB: " + super.nib + "\n";
@@ -37,25 +41,33 @@ public class Debito extends Conta
 		return info;
 	}
 	
+	@Override
 	public String mostrarInformacoes()
-	{ 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
-		
+	{ 		
 		String info = "";
 
-		info += "Saldo: " + super.saldo + "\n";
-		info += "NIB: " + super.nib + "\n";
-		info += "Data de criacao: " + dateFormat.format(super.datacriacao) + "\n";
-		info += "Estado: " + super.activa;
+		info += this.mostrar() + "\n";
+		info += "Data de criacao: " + super.getDataFormatada() + "\n";
+		
+		if(super.activa)
+		{
+			info += "Estado: activa";
+		}
+		else
+		{
+			info += "Estado: inactiva";
+		}
 		
 		return info;
 	}
 
+	@Override
 	public void mostrarSaldo()
 	{
-		System.out.println("Saldo: " + super.saldo + "€");
+		System.out.println("Saldo: " + super.saldo + " €");
 	}
 	
+	@Override
 	public String obterTipo()
 	{
 		return "Tipo: Debito";

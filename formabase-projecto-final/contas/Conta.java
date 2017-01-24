@@ -1,14 +1,22 @@
 package contas;
 
 import gestaobancaria.Banco;
+import transaccoes.Deposito;
+import transaccoes.Transaccao;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
-public abstract class Conta {	
+public abstract class Conta
+{	
 	protected double saldo;
 	protected int nib;
 	protected Date datacriacao;
 	protected boolean activa;
+	
+	protected ArrayList<Transaccao> transaccoes; 
 	
 	//METODOS ABSTRACTOS
 	
@@ -54,11 +62,15 @@ public abstract class Conta {
 	//METODOS IMPLEMENTADOS	
 	
 	public Conta(){
+		this.transaccoes = new ArrayList<Transaccao>(); 
+		
 		datacriacao = new Date();
-		saldo = 0;
+		saldo = 0.0;
 		
 		Random geradoraleatorio = new Random();
 		int numaleatorio = geradoraleatorio.nextInt(Integer.MAX_VALUE);
+		
+		nib = numaleatorio;
 		
 		activa=true;
 	}
@@ -87,4 +99,42 @@ public abstract class Conta {
 	public boolean estaActiva(){
 		return activa;
 	}
+	
+	public void mostrarExtracto()
+	{
+		if(this.transaccoes == null)
+		{
+			System.out.println("Nao ha registo de qualquer tipo de transaccao na sua conta.\n");
+			
+			this.obterSaldo();
+			
+			return;
+		}
+		
+		for(Transaccao transaccao : this.transaccoes)
+		{
+			transaccao.mostrar();
+		}	
+		
+		System.out.println();
+		
+		this.obterSaldo();
+	}
+	
+	public ArrayList<Transaccao> obterTransaccoes()
+	{
+		return this.transaccoes;
+	}	
+	
+	public void adicionarTransaccao(Transaccao transaccao)
+	{
+		this.transaccoes.add(transaccao);
+	}	
+	
+	public String getDataFormatada()
+	{
+		SimpleDateFormat dataFormat = new SimpleDateFormat("dd-MM-yyyy");
+		
+		return dataFormat.format(this.datacriacao);			
+	}	
 }

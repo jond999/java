@@ -1,6 +1,6 @@
+
 package gestaobancaria;
 
-/*
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,46 +13,60 @@ import transaccoes.Transferencia;
 import contas.Conta;
 import contas.Debito;
 import contas.Prazo;
-*/
-public class TestesProjecto {
 
-	
-	public static void testarClientes(){
-		Cliente joao = new Cliente("joao",111,222);
-		Cliente pedro = new Cliente("pedro",123,456);
+public class TestesProjecto
+{	
+	public static void testarClientes()
+	{
+		Cliente joao = new Cliente("joao", 111, 222);
+		Cliente pedro = new Cliente("pedro", 123, 456);
 		
-		System.out.println(joao.obterInformacoes());
+		System.out.println(joao.obterInformacoes() + "\n");
 		System.out.println(pedro.obterInformacoes());
 	}
-	
-	
-	/*
-	public static void testarContas(){
+		
+	public static void testarContas()
+	{
 		Conta deb = new Debito();
 		Conta pr = new Prazo();
+			
+		System.out.println("Saldo da conta de Debito: " + deb.obterSaldo() + " €\n");
 		
-
-		
-		System.out.println("Saldo da conta debito " + deb.obterSaldo());
 		deb.depositar(500);
 		deb.levantar(150);		
-		System.out.println("Informações conta debito " + deb.mostrarInformacoes());
-		System.out.println("Nib da conta " + deb.obterNib());
+		
+		System.out.println("Informações da conta de Debito:\n");
+		System.out.println(deb.mostrarInformacoes());
+		
+		System.out.println();
+
+		System.out.println("Nib da conta: " + deb.obterNib());
+
 		deb.transferir(100, pr);
 		deb.levantar(1200);
-		System.out.println("Saldo da conta debito " + deb.obterSaldo());
 		
-		System.out.println("Saldo da conta prazo " + deb.obterSaldo());
+		System.out.println();
+		
+		System.out.println("Saldo da conta de Debito: " + deb.obterSaldo() + " €");
+		System.out.println("Saldo da conta a Prazo: " + pr.obterSaldo() + " €\n");
+		
 		pr.depositar(900);
 		pr.levantar(400);		
-		System.out.println("Saldo deb " + deb.obterSaldo());
-		System.out.println("Informações conta debito " + deb.mostrarInformacoes());
-		System.out.println("Nib da conta " + deb.obterNib());
-		System.out.println("Saldo da conta prazo " + deb.obterSaldo());
+		
+		System.out.println("Saldo da conta a Prazo: " + pr.obterSaldo() + " €\n");
+		
+		System.out.println("Informacoes da conta a Prazo:\n");
+		System.out.println(pr.mostrarInformacoes());
+		
+		System.out.println();
+		
+		System.out.println("Nib da conta: " + pr.obterNib());
+		
+		System.out.println();
+		
+		System.out.println("Saldo da conta a Prazo: " + pr.obterSaldo() + " €");
 	}
-	*/
-	
-	/*
+
 	public static void testarContasComClientes(){
 		Cliente joao = new Cliente("joao",111,222);
 				
@@ -76,9 +90,7 @@ public class TestesProjecto {
 			System.out.println("Conta Debito do joao encontrada");
 		}
 	}
-	*/
-	
-	/*
+
 	public static void testarTransaccoes(){
 		Conta deb = new Debito();
 		Conta deb2 = new Debito();
@@ -98,9 +110,9 @@ public class TestesProjecto {
 		System.out.println(cap.obterTipo());
 		System.out.println(transf.obterTipo());
 	}
-	*/
 	
-	/*
+	
+	
 	public static void testarTransaccoesComContas(){
 		
 		Conta deb = new Debito();
@@ -121,9 +133,9 @@ public class TestesProjecto {
 		System.out.println("A conta tem " + transaccoes.size() + " transacções");
 		deb.mostrarExtracto();
 	}
-	*/
 	
-	/*
+	
+/*	
 	public static void testarBancoClientes(){
 		Banco.iniciar();
 		
@@ -145,9 +157,9 @@ public class TestesProjecto {
 		System.out.println("Listar clientes após desactivação");
 		Banco.listarClientes("");		
 	}
-	*/
 	
-	/*
+	
+	
 	public static void testarBancoContas(){
 		Banco.iniciar();
 		
@@ -164,10 +176,8 @@ public class TestesProjecto {
 		for (Conta c:contasjoao){
 			System.out.println(c.mostrarInformacoes() + "\n");
 		}
-	}
-	*/
+	}	
 	
-	/*
 	public static void testarInteraccaoBanco(){
 		Cliente c = new Cliente("joao",123,456);
 		
@@ -179,17 +189,19 @@ public class TestesProjecto {
 		
 		InteraccaoBanco.processaMenuContas(InteraccaoBanco.cli.obterContas());
 	}
-	*/
-		
-	public static void main(String[] args) {
+*/		
+	public static void main(String[] args)
+	{
 		testarClientes();
-		//testarContas();
+		
+		System.out.println();
+		
+		testarContas();
 		//testarContasComClientes();
 		//testarTransaccoes();
 		//testarTransaccoesComContas();		
 		//testarBancoClientes();
 		//testarBancoContas();
-		//testarInteraccaoBanco();
-		
+		//testarInteraccaoBanco();	
 	}
 }

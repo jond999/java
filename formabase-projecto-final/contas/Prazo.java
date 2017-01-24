@@ -1,9 +1,6 @@
-// TODO: inicializar jurosAcumulados e aplicar taxa de juro
-
 
 package contas;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -57,11 +54,27 @@ public class Prazo extends Conta
 		this.jurosAcumulados = jurosAcumulados;
 	}	
 	
+	private void aplicaTaxaDeJuro(double valor)
+	{
+		Date datahoje = new Date();
+		
+		int criacao = (int) super.datacriacao.getTime() / 1000;
+		int validade = (int) this.validade.getTime() / 1000;
+		int hoje =  (int) datahoje.getTime() / 1000;
+		
+		double tempo_decorrido = (1.0) * (hoje / (validade - criacao));
+		
+		this.jurosAcumulados += tempo_decorrido * this.taxaJuro * valor;
+	}
+	
+	@Override
 	public boolean levantar(double valor)
 	{
-		if(this.saldo >= valor)
+		if(super.saldo >= valor)
 		{
-			this.saldo -= valor;
+			super.saldo -= valor;
+			
+			this.aplicaTaxaDeJuro(valor);
 			
 			return true;
 		}
@@ -69,46 +82,61 @@ public class Prazo extends Conta
 		return false;
 	}
 	
+	@Override
 	public boolean transferir(double valor, Conta contadestino)
 	{
-		if(this.saldo >= valor)
+		if(super.saldo >= valor)
 		{
-			this.saldo -= valor;
+			super.saldo -= valor;
 			contadestino.saldo += valor;
+			
+			this.aplicaTaxaDeJuro(valor);
 		}
 		
 		return false;
 	}
 	
+	@Override
 	public String mostrar()
 	{
+		this.mostrarSaldo();
+		
 		String info = "";
 		
-		info += "NIB: " + this.nib + "\n";
+		info += "NIB: " + super.nib + "\n";
 		info += this.obterTipo();
 		
 		return info;
 	}
 	
+	@Override
 	public String mostrarInformacoes()
-	{
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
-		
+	{ 		
 		String info = "";
 
-		info += "Saldo: " + super.saldo + "\n";
-		info += "NIB: " + super.nib + "\n";
-		info += "Data de criacao: " + dateFormat.format(super.datacriacao) + "\n";
-		info += "Estado: " + super.activa;
+		info += this.mostrar() + "\n";
+		info += "Data de criacao: " + super.getDataFormatada() + "\n";
+		
+		if(super.activa)
+		{
+			info += "Estado: activa";
+		}
+		else
+		{
+			info += "Estado: inactiva";
+		}
 		
 		return info;
 	}
 
+	@Override
 	public void mostrarSaldo()
 	{
-		System.out.println("Saldo: " + this.saldo + "€");
+		System.out.println("Saldo: " + super.saldo + " €");
+		System.out.println("Juros acumulados: " + this.jurosAcumulados + " €");
 	}
 	
+	@Override
 	public String obterTipo()
 	{
 		return "Tipo: Prazo";
