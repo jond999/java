@@ -13,29 +13,29 @@ import contas.Conta;
 import contas.Prazo;
 import contas.Debito;*/
 
-public class Banco {
+public class Banco
+{
 	private static ArrayList<Cliente> clientes;
 	private static int numerocliente; //utilizado para as numeracoes dos clientes
 	private static int numeroconta;	//utilizado para as numeracoes das contas
 	
-	public static void iniciar(){
+	public static void iniciar()
+	{
 		clientes = new ArrayList<Cliente>();
 		numeroconta = 2451;
 		numerocliente = 1543;
 	}
 
-	public static int gerarNumConta() {
+	public static int gerarNumConta()
+	{
 		return numeroconta++;
 	}
 	
-	public static int gerarNumCliente() {
+	public static int gerarNumCliente()
+	{
 		return numerocliente++;
 	}
-	
-
-	
-	
-	
+		
 	//METODOS CLIENTES
 	
 	/**
@@ -45,28 +45,71 @@ public class Banco {
 	 * @param idcliente id do cliente a desactivar
 	 * @return booleano a indicar se foi ou nao possivel de desactivar o cliente
 	 */
-	/*public static boolean desactivarCliente(int idcliente){
-		//implementar o codigo deste metodo
+	public static boolean desactivarCliente(int idcliente)
+	{
+		Cliente alvo = procurarCliente(idcliente);
+		
+		if(alvo == null)
+		{
+			System.out.println("O cliente com o id " + idcliente + " nao foi encontrado!");
+			
+			return false;
+		}
+		
+		if(alvo.getActivo())
+		{
+			alvo.setActivo(false);
+			
+			return true;
+		}
+		
+		return false;
 	}
 	
 	/**
 	 * Lista os clientes do banco que tem o nome igual ao recebido como parametro.
 	 * Caso seja passada uma string vazia entao sao listados todos os clientes
 	 * @param criterionome nome do cliente a listar
-	 *//*
-	public static void listarClientes(String criterionome){
-		//implementar o codigo deste metodo
-	}*/
+	 */
+	public static void listarClientes(String criterionome)
+	{
+		if(criterionome.equals(""))
+		{
+			for(Cliente cliente : clientes)
+			{
+				System.out.println(cliente.getNome());
+			}
+			
+			return;
+		}
+		
+		for(Cliente cliente : clientes)
+		{
+			if(cliente.getNome().equals(criterionome))
+			{
+				System.out.println(cliente.getNome());
+			}
+		}		
+	}
 	
 	/**
 	 * Procura o cliente com o id recebido como parametro e devolve-o caso exista.
 	 * Caso não exista devolve null. Este metodo e utilizado noutros metodos do banco.
 	 * @param userid id do cliente a procurar
 	 * @return devolve o cliente com o id procurado ou null
-	 *//*
-	public static Cliente procurarCliente(int userid){
-		//implementar o codigo deste metodo
-	}*/
+	 */
+	public static Cliente procurarCliente(int userid)
+	{
+		for(Cliente cliente : clientes)
+		{
+			if(cliente.getUserid() == userid)
+			{
+				return cliente;
+			}
+		}
+		
+		return null;
+	}
 	
 	/**
 	 * Utiliza o userid para encontrar o respectivo cliente e se existir confirma
@@ -76,8 +119,9 @@ public class Banco {
 	 * @param password passwor dod utilizador que esta a fazer login
 	 * @return Cliente que acabou de fazer login ou null caso não coincidam as credênciais
 	 *//*
-	public static Cliente validarLogin(int userid, int password) {
-		//implementar o codigo deste metodo
+	public static Cliente validarLogin(int userid, int password)
+	{
+	
 	}*/
 	
 	/**
