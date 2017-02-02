@@ -86,7 +86,14 @@ public class Cliente
 	
 	public void adicionarConta(Conta conta)
 	{
-		this.listaDeContas.add(conta);
+		if(conta != null)
+		{
+			this.listaDeContas.add(conta);
+			
+			return;
+		}
+		
+		System.out.println("A conta nao foi adicionada! A conta nao se encontra criada.");
 	}
 	
 	public ArrayList<Conta> obterContas()

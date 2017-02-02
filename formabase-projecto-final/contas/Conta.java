@@ -113,7 +113,7 @@ public abstract class Conta
 		
 		for(Transaccao transaccao : this.transaccoes)
 		{
-			transaccao.mostrar();
+			System.out.println(transaccao.mostrar());
 		}	
 		
 		System.out.println();

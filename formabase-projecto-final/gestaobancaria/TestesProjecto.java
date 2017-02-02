@@ -67,7 +67,8 @@ public class TestesProjecto
 		System.out.println("Saldo da conta a Prazo: " + pr.obterSaldo() + " €");
 	}
 
-	public static void testarContasComClientes(){
+	public static void testarContasComClientes()
+	{
 		Cliente joao = new Cliente("joao",111,222);
 				
 		Conta deb = new Debito();
@@ -79,49 +80,61 @@ public class TestesProjecto
 		ArrayList<Conta> contasjoao = joao.obterContas();
 		
 		//percorrer todas as contas do joao e mostrarInformacoes
-		for (int i = 0; i<contasjoao.size();++i){
+		for(int i = 0; i < contasjoao.size(); i++)
+		{
 			Conta contacorrente = contasjoao.get(i);
+			
 			System.out.println(contacorrente.mostrarInformacoes());
 		}
 		
 		Conta contadebitojoao = joao.obterConta(deb.obterNib());
+		Conta contaprazojoao = joao.obterConta(pr.obterNib());
 		
-		if (contadebitojoao!= null){
-			System.out.println("Conta Debito do joao encontrada");
+		if (contadebitojoao!= null)
+		{
+			System.out.println();
+			System.out.println("Conta de Debito do joao encontrada!");
 		}
+		
+		if (contaprazojoao!= null)
+		{
+			System.out.println();
+			System.out.println("Conta a Prazo do joao encontrada!");
+		}		
 	}
 
-	public static void testarTransaccoes(){
+	public static void testarTransaccoes()
+	{
 		Conta deb = new Debito();
 		Conta deb2 = new Debito();
 		
 		Transaccao dep = new Deposito(new Date(), deb, 500);
 		Transaccao lev = new Levantamento(new Date(), deb, 100);		
 		Transaccao cap = new CapitalizacaoJuros(new Date(), deb, 25);
-		Transaccao transf = new Transferencia(new Date(), deb, 25,deb2);
+		Transaccao transf = new Transferencia(new Date(), deb, 25, deb2);
 		
 		System.out.println(dep.mostrar());
 		System.out.println(lev.mostrar());
 		System.out.println(cap.mostrar());
 		System.out.println(transf.mostrar());
+		
 		System.out.println();
+		
 		System.out.println(dep.obterTipo());
 		System.out.println(lev.obterTipo());
 		System.out.println(cap.obterTipo());
 		System.out.println(transf.obterTipo());
 	}
 	
-	
-	
-	public static void testarTransaccoesComContas(){
-		
+	public static void testarTransaccoesComContas()
+	{	
 		Conta deb = new Debito();
 		Conta deb2 = new Debito();
 		
 		Transaccao dep = new Deposito(new Date(), deb, 500);
 		Transaccao lev = new Levantamento(new Date(), deb, 100);		
 		Transaccao cap = new CapitalizacaoJuros(new Date(), deb, 25);
-		Transaccao transf = new Transferencia(new Date(), deb, 25,deb2);
+		Transaccao transf = new Transferencia(new Date(), deb, 25, deb2);
 		
 		deb.adicionarTransaccao(dep);
 		deb.adicionarTransaccao(lev);
@@ -130,55 +143,62 @@ public class TestesProjecto
 		
 		ArrayList<Transaccao> transaccoes = deb.obterTransaccoes();
 		
-		System.out.println("A conta tem " + transaccoes.size() + " transacções");
+		System.out.println("A conta tem " + transaccoes.size() + " transaccoes.\n");
+		
 		deb.mostrarExtracto();
 	}
 	
-	
-/*	
-	public static void testarBancoClientes(){
+	public static void testarBancoClientes()
+	{
 		Banco.iniciar();
 		
 		Banco.criarCliente("joao", 123, 456);
 		Banco.criarCliente("pedro", 232, 454);
 		
-		System.out.println("Listar clientes sem criterio \n");
+		System.out.println("Listar clientes sem criterio:");
 		Banco.listarClientes("");
 		
-		System.out.println("Listar clientes com criterio 'pedro' \n");
+		System.out.println();
+		
+		System.out.println("Listar clientes com o criterio 'pedro':");
 		Banco.listarClientes("pedro");
 		
-		Cliente cli = Banco.procurarCliente(123);
-		System.out.println("Mostrar o cliente com id 123:\n" + cli.obterInformacoes() + "\n"); 
+		System.out.println();
 		
+		Cliente cli = Banco.procurarCliente(123);
+		System.out.println("Mostrar o cliente com id 123:\n" + cli.obterInformacoes()); 
+
+		System.out.println();
 		
 		Banco.desactivarCliente(123);
 		
-		System.out.println("Listar clientes após desactivação");
-		Banco.listarClientes("");		
+		System.out.println("Listar clientes após desactivação:");
+		Banco.listarClientes("");
+		
+		System.out.println();
 	}
 	
-	
-	
-	public static void testarBancoContas(){
+	public static void testarBancoContas()
+	{
 		Banco.iniciar();
 		
 		Banco.criarCliente("joao", 123, 456);
 		
 		Cliente joao = Banco.procurarCliente(123);
-		
-		
+			
 		Banco.criarConta(joao, 1); //Debito
 		Banco.criarConta(joao, 2); //Credito
 			
 		ArrayList<Conta> contasjoao = joao.obterContas();
 		
-		for (Conta c:contasjoao){
+		for(Conta c : contasjoao)
+		{
 			System.out.println(c.mostrarInformacoes() + "\n");
 		}
 	}	
-	
-	public static void testarInteraccaoBanco(){
+	/*
+	public static void testarInteraccaoBanco()
+	{
 		Cliente c = new Cliente("joao",123,456);
 		
 		Conta deb = new Debito();
@@ -189,19 +209,38 @@ public class TestesProjecto
 		
 		InteraccaoBanco.processaMenuContas(InteraccaoBanco.cli.obterContas());
 	}
-*/		
+	*/
 	public static void main(String[] args)
 	{
+/**/		
 		testarClientes();
 		
-		System.out.println();
+		System.out.println("---------------------------------------------------------------------------");
 		
 		testarContas();
-		//testarContasComClientes();
-		//testarTransaccoes();
-		//testarTransaccoesComContas();		
-		//testarBancoClientes();
-		//testarBancoContas();
-		//testarInteraccaoBanco();	
+		
+		System.out.println("---------------------------------------------------------------------------");
+		
+		testarContasComClientes();
+		
+		System.out.println("---------------------------------------------------------------------------");
+		
+		testarTransaccoes();
+		
+		System.out.println("---------------------------------------------------------------------------");
+																															
+		testarTransaccoesComContas();		
+		
+		System.out.println("---------------------------------------------------------------------------");
+		
+		testarBancoClientes();
+		
+		System.out.println("---------------------------------------------------------------------------");
+	
+		testarBancoContas();
+		
+		System.out.println("---------------------------------------------------------------------------");
+/**/		
+		// testarInteraccaoBanco();	
 	}
 }
