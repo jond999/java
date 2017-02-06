@@ -1,6 +1,7 @@
 
 package gestaobancaria;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -186,8 +187,8 @@ public class TestesProjecto
 		
 		Cliente joao = Banco.procurarCliente(123);
 			
-		Banco.criarConta(joao, 1); //Debito
-		Banco.criarConta(joao, 2); //Credito
+		Banco.criarConta(joao, 1); // Debito
+		Banco.criarConta(joao, 2); // Credito
 			
 		ArrayList<Conta> contasjoao = joao.obterContas();
 		
@@ -196,23 +197,35 @@ public class TestesProjecto
 			System.out.println(c.mostrarInformacoes() + "\n");
 		}
 	}	
-	/*
-	public static void testarInteraccaoBanco()
+	
+	public static void testarInteraccaoBanco() throws IOException
 	{
-		Cliente c = new Cliente("joao",123,456);
+		Cliente c = new Cliente("joao", 123, 456);
 		
 		Conta deb = new Debito();
 		Conta pr = new Prazo();
+		Conta deb2 = new Debito();
+		Conta pr2 = new Prazo();
+		Conta deb3 = new Debito();
+		Conta pr3 = new Prazo();		
+		
+		System.out.println(pr.estaActiva());
+		
 		c.adicionarConta(deb);
 		c.adicionarConta(pr);
-		InteraccaoBanco.cli =c; 
+		c.adicionarConta(deb2);
+		c.adicionarConta(pr2);
+		c.adicionarConta(deb3);
+		c.adicionarConta(pr3);		
 		
-		InteraccaoBanco.processaMenuContas(InteraccaoBanco.cli.obterContas());
+		InteraccaoBanco.cli = c; 
+		
+		InteraccaoBanco.processaMenuContas(InteraccaoBanco.cli.obterContas());	
 	}
-	*/
-	public static void main(String[] args)
+	
+	public static void main(String[] args) throws IOException
 	{
-/**/		
+/*		
 		testarClientes();
 		
 		System.out.println("---------------------------------------------------------------------------");
@@ -240,7 +253,8 @@ public class TestesProjecto
 		testarBancoContas();
 		
 		System.out.println("---------------------------------------------------------------------------");
-/**/		
-		// testarInteraccaoBanco();	
+*/
+		
+		testarInteraccaoBanco();	
 	}
 }

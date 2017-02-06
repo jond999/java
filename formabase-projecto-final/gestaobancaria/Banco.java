@@ -1,5 +1,6 @@
 package gestaobancaria;
 
+import java.io.File;
 import java.util.ArrayList;
 
 //import java.util.Date;
@@ -18,6 +19,11 @@ import contas.Prazo;
 
 public class Banco
 {
+	private static final String FICHEIROCLIENTES = "dados/clientes.csv";
+	private static final String FICHEIROCONTAS = "dados/clientes.csv";
+	private static final String FICHEIROTRANSACCOES = "dados/clientes.csv";
+	private static final String FICHEIROCONFIGURACOES = "dados/configuracoes.txt";
+	
 	private static ArrayList<Cliente> clientes;
 	private static int numerocliente; //utilizado para as numeracoes dos clientes
 	private static int numeroconta;	//utilizado para as numeracoes das contas
@@ -253,4 +259,46 @@ public class Banco
 		 
 		 return novaConta.obterNib();
 	 }
+	 
+	 private static void carregarDados()
+	 {
+		 File ficheiroclientes = new File(FICHEIROCLIENTES);
+		 File ficheirocontas = new File(FICHEIROCONTAS);
+		 File ficheirotransaccoes = new File(FICHEIROTRANSACCOES);
+		 File ficheiroconfiguracoes = new File(FICHEIROCONFIGURACOES);
+		 
+		 if(!ficheiroclientes.exists())
+		 {
+			 System.out.println("Nao e possivel carregar dados pois nao existe o ficheiro de clientes para carregar.");
+			 
+			 return;
+		 }
+	
+		 if(!ficheirocontas.exists())
+		 {
+			 System.out.println("Nao e possivel carregar dados pois nao existe o ficheiro de contas para carregar.");
+			 
+			 return;
+		 }
+		 
+		 if(!ficheirotransaccoes.exists())
+		 {
+			 System.out.println("Nao e possivel carregar dados pois nao existe o ficheiro de transaccoes para carregar.");
+			 
+			 return;
+		 }		 
+			 
+		 try
+		 {
+			 importarClientes(ficheiroclientes);
+			 importarContas(ficheirocontas);
+			 importarTransaccoes(ficheirotransaccoes);
+		 }
+		 catch(Exception e)
+		 {
+			 System.out.println("Erro na importacao dos ficheiros!");
+		 }
+	 }
+	 
+	 private static void importarClientes()
 }

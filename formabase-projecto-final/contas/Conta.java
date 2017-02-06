@@ -1,6 +1,5 @@
 package contas;
 
-import gestaobancaria.Banco;
 import transaccoes.Deposito;
 import transaccoes.Transaccao;
 
@@ -19,7 +18,6 @@ public abstract class Conta
 	protected ArrayList<Transaccao> transaccoes; 
 	
 	//METODOS ABSTRACTOS
-	
 	/**
 	 * Levanta dinheiro desta conta, decrementando o saldo existente
 	 * Isto so acontece se a conta tiver o saldo pelo menos igual ao que se pretende levantar
@@ -58,10 +56,9 @@ public abstract class Conta
 	
 	public abstract String obterTipo();	
 	
-			
 	//METODOS IMPLEMENTADOS	
-	
-	public Conta(){
+	public Conta()
+	{
 		this.transaccoes = new ArrayList<Transaccao>(); 
 		
 		datacriacao = new Date();
@@ -79,24 +76,29 @@ public abstract class Conta
 	 * Deposita um valor na Conta. Este metodo nao tem qualquer tipo de verificacoes
 	 * @param valor valor a depositar
 	 */
-	public void depositar(double valor){
+	public void depositar(double valor)
+	{
 		saldo += valor;		
-		transaccoes.add(new Deposito(new Date(),this,valor));	
+		transaccoes.add(new Deposito(new Date(), this, valor));	
 	}
 		
-	public int obterNib(){
+	public int obterNib()
+	{
 		return nib;
 	}
 	
-	public double obterSaldo(){
+	public double obterSaldo()
+	{
 		return saldo;		
 	}
 	
-	public void desactivar(){
+	public void desactivar()
+	{
 		activa=false;
 	}
 	
-	public boolean estaActiva(){
+	public boolean estaActiva()
+	{
 		return activa;
 	}
 	

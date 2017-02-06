@@ -104,7 +104,7 @@ public class Prazo extends Conta
 		String info = "";
 		
 		info += "NIB: " + super.nib + "\n";
-		info += this.obterTipo();
+		info += "Tipo: " + this.obterTipo();
 		
 		return info;
 	}
@@ -139,6 +139,6 @@ public class Prazo extends Conta
 	@Override
 	public String obterTipo()
 	{
-		return "Tipo: Prazo";
+		return "Prazo";
 	}
 }
