@@ -200,6 +200,7 @@ public class TestesProjecto
 	
 	public static void testarInteraccaoBanco() throws IOException
 	{
+		/* PARTE 1
 		Cliente c = new Cliente("joao", 123, 456);
 		
 		Conta deb = new Debito();
@@ -208,9 +209,7 @@ public class TestesProjecto
 		Conta pr2 = new Prazo();
 		Conta deb3 = new Debito();
 		Conta pr3 = new Prazo();		
-		
-		System.out.println(pr.estaActiva());
-		
+				
 		c.adicionarConta(deb);
 		c.adicionarConta(pr);
 		c.adicionarConta(deb2);
@@ -220,7 +219,22 @@ public class TestesProjecto
 		
 		InteraccaoBanco.cli = c; 
 		
-		InteraccaoBanco.processaMenuContas(InteraccaoBanco.cli.obterContas());	
+		InteraccaoBanco.processaMenuContas(InteraccaoBanco.cli.obterContas());
+		*/
+		
+		/* PARTE 2
+		Banco.iniciar();
+		
+		Cliente c = Banco.procurarCliente(111);
+		
+		InteraccaoBanco.cli = c; 
+		
+		InteraccaoBanco.processaMenuContas(InteraccaoBanco.cli.obterContas());
+		*/	
+		
+		/* PARTE 3 */
+		Banco.iniciar();
+		/* */			
 	}
 	
 	public static void main(String[] args) throws IOException

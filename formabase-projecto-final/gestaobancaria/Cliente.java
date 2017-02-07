@@ -24,6 +24,16 @@ public class Cliente
 		this.listaDeContas = new ArrayList<Conta>();
 	}
 	
+	public Cliente(String nome, int userid, int password, boolean activo)
+	{
+		this.nome = nome;
+		this.userid = userid;
+		this.password = password;
+		this.activo = activo;
+		
+		this.listaDeContas = new ArrayList<Conta>();
+	}	
+	
 	public String obterInformacoes()
 	{
 		String info = "";

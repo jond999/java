@@ -38,11 +38,7 @@ public abstract class InteraccaoBanco
 			System.out.println("7 -> Sair do Menu");
 			
 			System.out.println();
-			
-			
-			System.out.println(con.obterNib());
-			System.out.println(cli.obterConta(44807973));
-			
+						
 			int operacao = input.nextInt();
 			
 			System.out.println();
@@ -110,8 +106,8 @@ public abstract class InteraccaoBanco
 							
 							System.out.println();
 						}						
-						
-						if(Banco.obterConta(nibConta).equals(null))
+												
+						if(Banco.obterConta(nibConta) == null || !cli.getActivo())
 						{
 							System.out.println("A conta destino que especificou nao existe.");
 							
@@ -146,13 +142,13 @@ public abstract class InteraccaoBanco
 						
 						break;
 				
-				case 4: System.out.println("Escolheu 'Obter extracto'!");
+				case 4: con.mostrarExtracto();
 						break;
 				
-				case 5: System.out.println("Escolheu 'Obter saldo'!");
+				case 5: con.mostrarSaldo();
 						break;
 				
-				case 6: System.out.println("Escolheu 'Obter informacoes'!");
+				case 6: System.out.println(con.mostrarInformacoes());
 						break;
 				
 				case 7:	//input.close();
@@ -172,8 +168,8 @@ public abstract class InteraccaoBanco
 	 * @param contascliente Cliente sobre o qual se quer visualizar as contas
 	 * @throws IOException 
 	 */
-	protected static void processaMenuContas(ArrayList<Conta> contascliente) throws IOException
-	{		
+	protected static void processaMenuContas(ArrayList<Conta> contascliente)
+	{				
 		int i;
 		int operacao = 0;
 		
@@ -198,6 +194,7 @@ public abstract class InteraccaoBanco
 				else if(tipoConta.equals("Prazo"))
 				{
 					System.out.println(i + " -> " + tipoConta + "  - " + conta.obterNib());
+					
 				}			
 			}
 			

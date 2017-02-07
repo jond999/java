@@ -22,6 +22,7 @@ public class Debito extends Conta
 		if(super.saldo >= valor)
 		{
 			super.saldo -= valor;
+						
 			contadestino.saldo += valor;
 		}
 		

@@ -1,6 +1,9 @@
 package gestaobancaria;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 //import java.util.Date;
@@ -20,8 +23,8 @@ import contas.Prazo;
 public class Banco
 {
 	private static final String FICHEIROCLIENTES = "dados/clientes.csv";
-	private static final String FICHEIROCONTAS = "dados/clientes.csv";
-	private static final String FICHEIROTRANSACCOES = "dados/clientes.csv";
+	private static final String FICHEIROCONTAS = "dados/contas.csv";
+	private static final String FICHEIROTRANSACCOES = "dados/transacoces.csv";
 	private static final String FICHEIROCONFIGURACOES = "dados/configuracoes.txt";
 	
 	private static ArrayList<Cliente> clientes;
@@ -31,8 +34,17 @@ public class Banco
 	public static void iniciar()
 	{
 		clientes = new ArrayList<Cliente>();
+		
 		numeroconta = 2451;
 		numerocliente = 1543;
+		
+		simularDados();	
+		
+		clientes.get(0).setActivo(false);
+		
+		Multibanco mb = new Multibanco();
+		
+		mb.login();
 	}
 
 	public static int gerarNumConta()
@@ -134,10 +146,11 @@ public class Banco
 	public static Cliente validarLogin(int userid, int password)
 	{
 		Cliente cliente = procurarCliente(userid); 
-		
+				
 		if(cliente == null)
 		{
 			System.out.println("O login falhou! O cliente com o userid \"" + userid + "\" nao foi encontrado no sistema.");
+			System.out.println();
 			
 			return null;
 		}
@@ -145,9 +158,12 @@ public class Banco
 		if(password != cliente.getPassword())
 		{
 			System.out.println("O login falhou! A password que usou nao corresponde com a password do userid \"" + userid + "\".");
+			System.out.println();
 			
 			return null;
 		}
+		
+		
 		
 		return cliente;
 	}
@@ -166,6 +182,13 @@ public class Banco
 		clientes.add(novoCliente);
 	}
 	
+	public static void criarCliente(String nome, int userid, int password, boolean activo)
+	{
+		Cliente novoCliente = new Cliente(nome, userid, password, activo);
+				
+		clientes.add(novoCliente);
+	}	
+	
 	/**
 	 * Procura em todos os clientes por uma conta com o nib recebido como parâmetro
 	 * Devolve o objecto conta caso exista ou null caso não exista
@@ -177,14 +200,15 @@ public class Banco
 		 for(Cliente cliente : clientes)
 		 {
 			 Conta contaProcurada = cliente.obterConta(nib);
-			 
-			 if(contaProcurada != null)
+
+			 if(!contaProcurada.equals(null))
 			 {
+
 				 return contaProcurada;
 			 }
 		 }
 		 
-		 return null;
+		return null;
 	 }
 	 
 	 /**
@@ -260,6 +284,20 @@ public class Banco
 		 return novaConta.obterNib();
 	 }
 	 
+	 public static void simularDados()
+	 {
+		 Cliente joao = new Cliente("joao", 111, 222);
+		 joao.adicionarConta(new Prazo());
+		 joao.adicionarConta(new Debito());
+		 
+		 Cliente pedro = new Cliente("pedro", 123, 456);
+		 pedro.adicionarConta(new Prazo());
+		 pedro.adicionarConta(new Debito());
+		 
+		 clientes.add(joao);
+		 clientes.add(pedro);
+	 }
+	 	 
 	 private static void carregarDados()
 	 {
 		 File ficheiroclientes = new File(FICHEIROCLIENTES);
@@ -300,5 +338,72 @@ public class Banco
 		 }
 	 }
 	 
-	 private static void importarClientes()
+	 private static void importarClientes(File ficheiroclientes) throws IOException
+	 {
+		 BufferedReader br = new BufferedReader(new FileReader(ficheiroclientes));
+		 
+		 String texto = br.readLine();
+		 
+		 while(texto != null)
+		 {
+			 String[] dadosficheiros = texto.split(";");
+			 
+			 String nome = dadosficheiros[0];
+			 int userid = Integer.parseInt(dadosficheiros[1]);
+			 int password = Integer.parseInt(dadosficheiros[2]);
+			 boolean activo = Boolean.parseBoolean(dadosficheiros[3]);
+			 
+			 Banco.criarCliente(nome, userid, password, activo);
+			 
+			 texto = br.readLine();
+		 }
+		 
+		 br.close();
+	 }
+	 
+	 private static void importarContas(File ficheirocontas) throws IOException
+	 {
+		 BufferedReader br = new BufferedReader(new FileReader(ficheirocontas));
+		 
+		 String texto = br.readLine();
+		 
+		 while(texto != null)
+		 {
+			 String[] dadosficheiros = texto.split(";");
+			 
+			 String nome = dadosficheiros[0];
+			 int userid = Integer.parseInt(dadosficheiros[1]);
+			 int password = Integer.parseInt(dadosficheiros[2]);
+			 boolean activo = Boolean.parseBoolean(dadosficheiros[3]);
+			 
+			 Banco.criarCliente(nome, userid, password, activo);
+			 
+			 texto = br.readLine();
+		 }
+		 
+		 br.close();
+	 }
+	 
+	 private static void importarTransaccoes(File ficheirotransaccoes) throws IOException
+	 {
+		 BufferedReader br = new BufferedReader(new FileReader(ficheirotransaccoes));
+		 
+		 String texto = br.readLine();
+		 
+		 while(texto != null)
+		 {
+			 String[] dadosficheiros = texto.split(";");
+			 
+			 String nome = dadosficheiros[0];
+			 int userid = Integer.parseInt(dadosficheiros[1]);
+			 int password = Integer.parseInt(dadosficheiros[2]);
+			 boolean activo = Boolean.parseBoolean(dadosficheiros[3]);
+			 
+			 Banco.criarCliente(nome, userid, password, activo);
+			 
+			 texto = br.readLine();
+		 }
+		 
+		 br.close();
+	 }	 
 }

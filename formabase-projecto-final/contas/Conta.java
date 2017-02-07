@@ -94,7 +94,7 @@ public abstract class Conta
 	
 	public void desactivar()
 	{
-		activa=false;
+		activa = false;
 	}
 	
 	public boolean estaActiva()
@@ -104,11 +104,11 @@ public abstract class Conta
 	
 	public void mostrarExtracto()
 	{
-		if(this.transaccoes == null)
+		if(this.transaccoes.isEmpty())
 		{
 			System.out.println("Nao ha registo de qualquer tipo de transaccao na sua conta.\n");
 			
-			this.obterSaldo();
+			System.out.println("Saldo: " + this.obterSaldo() + " €");
 			
 			return;
 		}
@@ -120,7 +120,7 @@ public abstract class Conta
 		
 		System.out.println();
 		
-		this.obterSaldo();
+		System.out.println("Saldo: " + this.obterSaldo() + " €");
 	}
 	
 	public ArrayList<Transaccao> obterTransaccoes()
